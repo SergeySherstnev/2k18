@@ -1,5 +1,6 @@
-package com.tsystems.dao;
+package com.tsystems.dao.impl;
 
+import com.tsystems.dao.UserDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 

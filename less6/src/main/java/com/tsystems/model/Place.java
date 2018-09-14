@@ -4,29 +4,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
-@Entity (name = "user")
+
+@Entity (name = "market")
 @Data
 @NoArgsConstructor
 @Table
-public class User {
+public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private long id;
 
     @Column
-    private String name;
+    private String address;
 
-    @Column
-    private int card;
+    @Transient
+    private List<User> customer;
 
-    @ManyToOne
-    private Place market;
-
-    public User(String userName, int userCard) {
-        this.name = userName;
-        this.card = userCard;
+    public Place(String userAddress) {
+        this.address = userAddress;
     }
-
 }
