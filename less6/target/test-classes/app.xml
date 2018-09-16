@@ -10,12 +10,12 @@
     <context:component-scan base-package="com.tsystems" />
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
+    <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.tsystems"/>
+        <property name="packagesToScan" value="com.tsystems.model"/>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.show_sql">true</prop>
@@ -29,7 +29,7 @@
 
     <bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp2.BasicDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/hipermarket"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/test"/>
         <property name="username" value="postgres"/>
         <property name="password" value="SQLPassword1"/>
         <property name="initialSize" value="3"/>

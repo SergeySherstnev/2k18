@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface PlaceDao {
 
-    Serializable savePlace(Place trash);
+    Place getPlaceById(Long id);
+    Serializable savePlace(Place magazine);
     List<User> getAllCustomersByMagazin(Place magazine);
 }

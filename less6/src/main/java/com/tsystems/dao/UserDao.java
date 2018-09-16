@@ -8,5 +8,5 @@ public interface UserDao {
     Serializable saveUser(User user);
     User getUserById(Long id);
     void deleteUser(Long id);
-    List<User> getAll();
+    List<User> getAllCustomersByMagazine(Place place);
 }

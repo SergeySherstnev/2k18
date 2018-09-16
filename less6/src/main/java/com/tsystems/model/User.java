@@ -5,15 +5,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity (name = "user")
+@Entity
 @Data
 @NoArgsConstructor
-@Table
+@Table (name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private long id;
+    private Long id;
 
     @Column
     private String name;

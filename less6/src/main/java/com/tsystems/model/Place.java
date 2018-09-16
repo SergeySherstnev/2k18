@@ -7,10 +7,10 @@ import javax.persistence.*;
 import java.util.List;
 
 
-@Entity (name = "market")
+@Entity
 @Data
 @NoArgsConstructor
-@Table
+@Table (name = "market")
 public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Place {
     @Transient
     private List<User> customer;
 
-    public Place(String userAddress) {
-        this.address = userAddress;
+    public Place(String magazineAddress) {
+        this.address = magazineAddress;
     }
 }

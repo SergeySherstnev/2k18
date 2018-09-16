@@ -25,6 +25,11 @@ public class PlaceDaoImpl implements PlaceDao {
     }
 
     @Override
+    public Place getPlaceById (Long id) {
+        return (Place) getSession().get(Place.class, id);
+    }
+
+    @Override
     public Serializable savePlace(Place place) {
         return getSession().save(place);
     }

@@ -1,8 +1,9 @@
 package dao;
 
 
-import com.tsystems.dao.TrashDao;
+import com.tsystems.dao.PlaceDao;
 import com.tsystems.dao.UserDao;
+import com.tsystems.model.Place;
 import com.tsystems.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,14 +22,14 @@ public class TestDao {
     UserDao userDao;
 
     @Autowired
-    TrashDao trashDao;
+    PlaceDao placeDao;
 
     @Test
     public void test(){
-        User user=new User("2","2");
-        Trash trash =new Trash(1L,123, 123);
+        User user=new User("Ivan",111);
+        Place magazine =new Place("Mega-Dybenko");
         userDao.saveUser(user);
-        trashDao.saveTrash(trash);
+        placeDao.savePlace(magazine);
     }
 
 }

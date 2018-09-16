@@ -1,8 +1,10 @@
 package com.tsystems.dao.impl;
 
 import com.tsystems.dao.UserDao;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,7 +42,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getAll() {
-        return getSession().createCriteria(User.class).list();
+    public List<User> getAllCustomersByMagazine(Place place) {
+        Criteria criteria = getSession().createCriteria(User.class);
+        criteria.add(Restrictions.eq("place", place));
+        return criteria.list();
     }
 }
