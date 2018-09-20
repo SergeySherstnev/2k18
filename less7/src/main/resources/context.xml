@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.tsystems.components.Impl.InjectRandomIntAnnotationPostProcessor"/>
+    <bean class="com.tsystems.TerminatorQuoter" id = "terminatorQuoter">
+        <property name="message" value="I am GRUT!"/>
+    </bean>
+
+    <bean id="RoboDos"
+          class="com.tsystems.components.Impl.RoboDos">
+
+        <!--<constructor-arg ref="sonyLeg"/>
+        <constructor-arg ref="sonyHead"/>-->
+
+        <property name="head" ref="sonyHead"/>
+        <property name="leg" ref="toshibaLeg"/>
+
+    </bean>
+
+    <bean class="com.tsystems.components.Impl.RoboHeadSony" id="sonyHead"/>
+    <bean class="com.tsystems.components.Impl.RoboLegSony" id="sonyLeg"/>
+
+    <bean class="com.tsystems.components.Impl.RoboHeadToshiba" id="toshibaHead"/>
+    <bean class="com.tsystems.components.Impl.RoboLegToshiba" id="toshibaLeg"/>
+</beans>
