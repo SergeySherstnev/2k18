@@ -4,10 +4,14 @@ package com.market.server.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -23,8 +27,9 @@ public class Magazine {
     @Column
     private String address;
 
-    //@OneToMany(mappedBy = "magazine", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Transient
+    /*//@OneToMany(mappedBy = "magazine", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Transient*/
+    @ManyToMany(fetch=FetchType.EAGER, mappedBy = "magazines", cascade = CascadeType.ALL)
     private List<Customer> customers;
 
     public Magazine(String magazineAddress) {
@@ -32,6 +37,9 @@ public class Magazine {
         this.customers = new ArrayList<Customer>();
     }
 
+    public void deleteCustomer(Customer customer) {
+        customers.remove(customer);
+    }
     /*public Long getId() { return id; }
 
     public Magazine(String magazineAddress) {

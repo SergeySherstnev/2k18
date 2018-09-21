@@ -6,6 +6,11 @@ import com.market.server.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -18,8 +23,16 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void saveCustomer (Customer customer, Long id) {
         Magazine magazineById = magazineService.getMagazineById(id);
-        customer.setMagazine(magazineById);
+        List<Magazine> magazines = new ArrayList<Magazine>();
+        magazines.add(magazineById);
+        customer.setMagazines(magazines);
         customerDao.saveCustomer(customer);
+    }
+
+    @Override
+    public void deleteCustomerById(Long id) {
+        if (id != null)
+            customerDao.deleteCustomer(id);
     }
 
 }

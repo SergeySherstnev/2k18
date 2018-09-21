@@ -34,21 +34,26 @@ public class App {
 
         List<Customer> AllCustomers_Dybenko = new ArrayList<Customer>();
 
-        Magazine magazine1 = new Magazine("SPb, Mega-Dybenko");
-        Magazine magazine2 = new Magazine("SPb, Mega-Parnas");
-        magazineService.saveMagazine(magazine1);
-        magazineService.saveMagazine(magazine2);
+        //Magazine magazine1 = new Magazine("SPb, Mega-Dybenko");
+        //Magazine magazine2 = new Magazine("SPb, Mega-Parnas");
+        //magazineService.saveMagazine(magazine1);
+        //magazineService.saveMagazine(magazine2);
 
-        Customer customer1 = new Customer("Vasiliy", 111);
-        Customer customer2 = new Customer("Ivan", 222);
-        Customer customer3 = new Customer("Aleksey", 333);
+        //Customer customer1 = new Customer("Vasiliy", 111);
+        //Customer customer2 = new Customer("Yaroslav", 444);
+        //Customer customer2 = new Customer("Petr", 555);
+        //Customer customer3 = new Customer("Yakov", 666);
 
-        customerService.saveCustomer(customer1, 1L);
-        customerService.saveCustomer(customer2, 2L);
-        customerService.saveCustomer(customer3, 2L);
+        //customerService.saveCustomer(customer1, 3L);
+        //customerService.saveCustomer(customer2, 3L);
+        //customerService.saveCustomer(customer3, 2L);
 
-        AllCustomers_Dybenko = magazineService.getCustomersByMagazine(2L);
+        AllCustomers_Dybenko = magazineService.getCustomersByMagazine(3L);
         System.out.println(AllCustomers_Dybenko.toString());
+
+        //customerService.saveCustomer();
         //magazineService.deleteMagazineById(1L);
+        //magazineService.deleteMagazineById(1L);
+
     }
 }
