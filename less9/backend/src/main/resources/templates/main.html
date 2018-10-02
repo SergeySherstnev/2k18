@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>Hello We run</p>
+
+<div><tr th:each="bus : ${buses}">
+    <td th:text="${bus.bus_id}"></td>
+    <td th:text="${bus.bus_model}"></td>
+</tr></div>
+
+<a href="addBus">Add Bus</a>
+</body>
+</html>

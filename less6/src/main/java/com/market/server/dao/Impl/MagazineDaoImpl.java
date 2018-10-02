@@ -1,7 +1,7 @@
 package com.market.server.dao.Impl;
 
 import com.market.server.dao.MagazineDao;
-import com.market.server.model.Magazine;
+import com.market.server.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,9 @@ public class MagazineDaoImpl implements MagazineDao {
     public void deleteMagazine(Long id) {
         Magazine magazine = getMagazineById(id);
         if (magazine != null) {
+            /*for (Customer customer : magazine.getCustomers()) {
+                customer.remove(this);
+            }*/
             getSession().delete(magazine);
         }
     }

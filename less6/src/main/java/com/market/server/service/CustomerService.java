@@ -6,4 +6,5 @@ import com.market.server.model.Magazine;
 public interface CustomerService {
 
     void saveCustomer (Customer customer, Long id);
+    void deleteCustomerById(Long id);
 }

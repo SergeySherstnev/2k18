@@ -7,6 +7,10 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -25,13 +29,28 @@ public class Customer {
     @Column
     private int card;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "magazine_id", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Magazine magazine;
+    private Magazine magazine;*/
+    @ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name="magazine_customer", joinColumns = {@JoinColumn(name="customer_id", referencedColumnName="id")},
+            inverseJoinColumns = {@JoinColumn(name="magazine_id", referencedColumnName="id")}
+    )
+    private List<Magazine> magazines;
 
     public Customer(String userName, int userCard) {
         this.name = userName;
         this.card = userCard;
+        this.magazines = new ArrayList<Magazine>();
+    }
+
+    public void deleteMagazine(Magazine magazine) {
+        magazines.remove(magazine);
+        magazine.getCustomers().remove(this);
+    }
+
+    public String toString() {
+        return "("+id+") " + name + " card = " +card;
     }
 }
