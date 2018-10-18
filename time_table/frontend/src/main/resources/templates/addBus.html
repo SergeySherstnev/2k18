@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Add Bus</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Create a Bus information:</h1>
+
+<form th:action="@{/addBus}"
+      th:object="${busForm}" method="POST">
+    Model:
+    <input type="text" th:field="*{bus_model}" />
+    <br/>
+    Driver:
+    <input type="text" th:field="*{driver_id}" />
+    <br/>
+    <input type="submit" value="Create" />
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+</div>
+
+</body>
+</html>
