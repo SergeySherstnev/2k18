@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 //@Service
+@CrossOrigin
 @Controller
 public class BusServiceImpl implements BusService {
     @Autowired
@@ -60,6 +61,15 @@ public class BusServiceImpl implements BusService {
     @Override
     @GetMapping(value = "/busesOnRoute")
     @ResponseBody
+    public Iterable<Bus> findBusesOnRouteId(@ModelAttribute("id") Long routeId) {
+        Optional<Route> routeById = routeRepository.findById(routeId);
+        if (routeById != null)
+            return routeById.get().getBuses();
+        else
+            return null;
+    }
+
+    @Override
     public Iterable<Bus> findBusesOnRoute(@ModelAttribute("Route") String routeNumber) {
         Route routeByNumber = routeRepository.getRouteByNumber(routeNumber);
         if (routeByNumber != null)

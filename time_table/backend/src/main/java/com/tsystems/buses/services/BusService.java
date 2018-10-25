@@ -13,5 +13,6 @@ public interface BusService {
     void saveRoute(Route route);
     Iterable<Route> findAllRoutes();
     void addBusToRoute(String routeNumber, Bus bus);
+    Iterable<Bus> findBusesOnRouteId(Long routeId);
     Iterable<Bus> findBusesOnRoute(String routeNumber);
 }
