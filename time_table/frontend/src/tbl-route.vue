@@ -12,7 +12,7 @@
               </thead>
               <tbody v-for="item in filteredList">
               <tr>
-                  <td @click="choiseRoute(item.route_id)">{{item.route_number}}</td>
+                  <td @click="choiseRoute(item.route_number)">{{item.route_number}}</td>
               </tr>
               </tbody>
     </table>
@@ -31,7 +31,7 @@ export default {
     }
   },
   created() {
-      this.$axios.get('http://localhost:8090/allRoutes')
+      this.$axios.get('http://localhost:8090/cityRoutes')
             .then(response => {this.items = response.data})
             .catch(e => {this.errors.push(e) })
   },

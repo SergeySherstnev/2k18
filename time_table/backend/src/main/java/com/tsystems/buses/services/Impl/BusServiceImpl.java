@@ -5,15 +5,11 @@ import com.tsystems.buses.model.Route;
 import com.tsystems.buses.repository.*;
 import com.tsystems.buses.services.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.*;
 
-//@Service
-@CrossOrigin
-@Controller
+@Service
 public class BusServiceImpl implements BusService {
     @Autowired
     BusRepository busRepository;
@@ -26,15 +22,24 @@ public class BusServiceImpl implements BusService {
     }
 
     @Override
-    public Optional<Bus> findBusById(Long id) {
-        Optional<Bus> byId = busRepository.findById(id);
-        return byId;
+    public void deleteBus(Long id) {
+        busRepository.deleteById(id);
     }
 
     @Override
-    public Iterable<Bus> findAllBuses() {
-        Iterable<Bus> all = busRepository.findAll();
-        return all;
+    public Optional<Bus> findBusById(Long id) {
+        Optional<Bus> bus = busRepository.findById(id);
+        return bus;
+    }
+
+    @Override
+    public List<Bus> findAllBuses() {
+        List<Bus> targetCollection = new ArrayList<Bus>();
+        Iterator<Bus> iterator = (Iterator<Bus>) busRepository.findAll();
+        while (iterator.hasNext()) {
+            targetCollection.add(iterator.next());
+        }
+        return targetCollection;
     }
 
     @Override
@@ -43,35 +48,43 @@ public class BusServiceImpl implements BusService {
     }
 
     @Override
-    @CrossOrigin
-    @GetMapping(value = "/allRoutes")
-    @ResponseBody
-    public Iterable<Route> findAllRoutes() {
-        Iterable<Route> all = routeRepository.findAll();
-        return all;
+    public void deleteRoute(String routeNumber) {
+        Route routeByNumber = routeRepository.getRouteByNumber(routeNumber).get(0);
+        if (routeByNumber != null) {
+            routeRepository.delete(routeByNumber);
+        }
+    }
+
+    @Override
+    public Route findRouteByNumber(String number) {
+        return routeRepository.getRouteByNumber(number).get(0);
+    }
+
+    @Override
+    public Optional<Route> findRouteById(Long id) {
+        return routeRepository.findById(id);
+    }
+
+    @Override
+    public List<Route> findAllRoutes() {
+        List<Route> targetCollection = new ArrayList<Route>();
+        Iterable<Route> iterator = routeRepository.findAll();
+        for(Route item: iterator) {
+            targetCollection.add(item);
+        }
+        return targetCollection;
     }
 
     @Override
     public void addBusToRoute(String routeNumber, Bus bus) {
-        Route routeByNumber = routeRepository.getRouteByNumber(routeNumber);
+        Route routeByNumber = routeRepository.getRouteByNumber(routeNumber).get(0);
         bus.setRoute_id(routeByNumber.getRoute_id());
         busRepository.save(bus);
     }
 
     @Override
-    @GetMapping(value = "/busesOnRoute")
-    @ResponseBody
-    public Iterable<Bus> findBusesOnRouteId(@ModelAttribute("id") Long routeId) {
-        Optional<Route> routeById = routeRepository.findById(routeId);
-        if (routeById != null)
-            return routeById.get().getBuses();
-        else
-            return null;
-    }
-
-    @Override
-    public Iterable<Bus> findBusesOnRoute(@ModelAttribute("Route") String routeNumber) {
-        Route routeByNumber = routeRepository.getRouteByNumber(routeNumber);
+    public Collection<Bus> findBusesOnRoute(String routeNumber) {
+        Route routeByNumber = routeRepository.getRouteByNumber(routeNumber).get(0);
         if (routeByNumber != null)
             return routeByNumber.getBuses();
         else

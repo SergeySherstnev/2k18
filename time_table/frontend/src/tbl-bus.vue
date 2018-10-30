@@ -30,7 +30,8 @@ export default {
   },
   watch: {
       route_id: function(newVal, oldVal) {
-        this.$axios.get('http://localhost:8090/busesOnRoute', { params: {id: newVal } })
+        //this.$axios.get('http://localhost:8090/buses', { params: {id: newVal } })
+        this.$axios.get('http://localhost:8090/buses/' + newVal )
             .then(response => {this.items = response.data})
             .catch(e => {this.errors.push(e) })
       }
