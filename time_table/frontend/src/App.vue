@@ -1,63 +1,28 @@
 <template>
   <div class="container-fluid">
-    <my-header></my-header>
-    <div class="col-md-2">
-        <tbl-route @selectedRoute="selectedRoute"></tbl-route>
-    </div>
-    <div class="col-md-3">
-        <tbl-bus :route_id="selectedId"></tbl-bus>
-    </div>
-    <div ref="img_col" class="col-md-7">
-         <td><img src="img/spb_districts_kirovsky_vert.jpg" ref="img_1"></td>
+    <div class="container">
+        <app-nav></app-nav>
+        <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
-import myHeader from './Header.vue'
-import tblRoute from './tbl-route.vue'
-import tblBus from './tbl-bus.vue'
+  import appNav from './components/AppNav';
 
-export default {
-  data(){
+  export default {
+    data(){
       return {
-        windowWidth: 0,
-        selectedId: {}
       }
-  },
+    },
 
-  mounted() {
-    this.$nextTick(function() {
-      window.addEventListener('resize', this.getWindowWidth);
+    components: {
+      appNav
+    },
 
-      //Init
-      this.getWindowWidth()
-    })
-
-  },
-
-  components: {
-    myHeader,
-    tblRoute,
-    tblBus
-  },
-  methods:{
-      selectedRoute(route){
-        this.selectedId = route;
-      },
-      getWindowWidth(event) {
-        this.windowWidth = document.documentElement.clientWidth;
-        this.$refs.img_1.width=this.$refs.img_col.clientWidth-66;
-      },
-
-      img_size(num,w,h) {
-        var num,w,h;
-        console.log(this.windowWidth)
-      }
-  },
-
-  beforeDestroy() {
-    window.removeEventListener('resize', this.getWindowWidth);
   }
-}
 </script>
+
+<style scoped>
+
+</style>

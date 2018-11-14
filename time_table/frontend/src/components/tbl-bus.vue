@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import {dataService} from "../services/data.service";
+
 export default {
   props: {
       route_id : {  }
@@ -31,15 +33,15 @@ export default {
   watch: {
       route_id: function(newVal, oldVal) {
         //this.$axios.get('http://localhost:8090/buses', { params: {id: newVal } })
-        this.$axios.get('http://localhost:8090/buses/' + newVal )
-            .then(response => {this.items = response.data})
-            .catch(e => {this.errors.push(e) })
+        dataService.getBusesOnRoute(newVal)
+          .then(response => {this.items = response})
+          .catch(e => {this.errors.push(e) })
       }
    }
 }
 </script>
 
-<style>
+<style scoped>
 body {
   font-family: Helvetica Neue, Arial, sans-serif;
   font-size: 14px;

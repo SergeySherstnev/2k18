@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import {dataService} from "../services/data.service";
+
 export default {
   data () {
     return {
@@ -31,9 +33,12 @@ export default {
     }
   },
   created() {
-      this.$axios.get('http://localhost:8090/cityRoutes')
-            .then(response => {this.items = response.data})
-            .catch(e => {this.errors.push(e) })
+    dataService.getAllRoutes()
+        .then(response => {this.items = response})
+        .catch(e => {this.errors.push(e) })
+      // this.$axios.get('http://localhost:8090/cityRoutes')
+      //       .then(response => {this.items = response.data})
+      //       .catch(e => {this.errors.push(e) })
   },
   methods: {
         choiseRoute(id){
@@ -56,7 +61,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .search-wrapper {
     position: relative;
     label {
@@ -89,4 +94,44 @@ export default {
       }
     }
   }
+
+body {
+  font-family: Helvetica Neue, Arial, sans-serif;
+  font-size: 14px;
+  color: #444;
+}
+
+table {
+  border: 2px solid #42b983;
+  border-radius: 3px;
+  background-color: #fff;
+  text-align: center;
+}
+
+th {
+  background-color: #42b983;
+  color: rgba(255,255,255,0.66);
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+td {
+  background-color: #f9f9f9;
+}
+
+th, td {
+  min-width: 80px;
+  padding: 10px 20px;
+}
+
+th.active {
+  color: #fff;
+}
+
+th.active .arrow {
+  opacity: 1;
+}
 </style>

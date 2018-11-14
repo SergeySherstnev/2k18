@@ -53,7 +53,14 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+
+  externals: {
+    // global app config object
+    config: JSON.stringify({
+      apiUrl: 'http://localhost:8090'
+    })
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {
